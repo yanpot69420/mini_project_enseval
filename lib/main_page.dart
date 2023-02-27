@@ -24,6 +24,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 215, 249, 216),
       body: Container(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -66,6 +67,7 @@ class _DropButtonState extends State<DropButton> {
           return Container(
             padding: const EdgeInsets.only(left: 14.0, right: 14.0),
             decoration: BoxDecoration(
+                color: Colors.white,
                 border: Border.all(color: Colors.grey, width: 1.0),
                 borderRadius: BorderRadius.circular(10)),
             child: DropdownButton(
@@ -145,7 +147,12 @@ class ItemInList extends StatelessWidget {
                 children: [
                   Text(
                     '${product.title}',
-                    style: const TextStyle(fontWeight: FontWeight.w600),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   Text('\$ ${product.price}'),
                   const SizedBox(height: 15),
