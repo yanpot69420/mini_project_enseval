@@ -81,7 +81,7 @@ class DetailPage extends StatelessWidget {
                     )),
                     Expanded(
                         child: Container(
-                      padding: const EdgeInsets.only(left: 20),
+                      padding: const EdgeInsets.only(left: 20, right: 20),
                       decoration: BoxDecoration(
                           color: Colors.black.withOpacity(0.4),
                           borderRadius: BorderRadius.circular(10)),

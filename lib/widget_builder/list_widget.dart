@@ -26,23 +26,25 @@ class ListImageH extends StatelessWidget {
 }
 
 class DetailRating extends StatelessWidget {
-  final double rate; 
+  final double rate;
   const DetailRating({super.key, required this.rate});
 
   @override
   Widget build(BuildContext context) {
-    return RatingBar.builder(
-      initialRating: rate,
-      minRating: 1,
+    return RatingBarIndicator(
+      // initialRating: rate,
+      // minRating: 1,
+      rating: rate,
       itemCount: 5,
       direction: Axis.horizontal,
       itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
       itemBuilder: ((context, index) => Icon(Icons.star, color: Colors.amber)),
-      onRatingUpdate: (rating) {
-        // do nothing
-      },
-      ignoreGestures: true,
-      allowHalfRating: true,
+      // onRatingUpdate: (rating) {
+      //   // do nothing
+      // },
+      // ignoreGestures: true,
+      // allowHalfRating: true,
+
       itemSize: 35.0,
     );
   }

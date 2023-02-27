@@ -13,8 +13,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-    String? choose;
-
+  String? choose;
 
   @override
   void initState() {
@@ -22,33 +21,26 @@ class _MainPageState extends State<MainPage> {
     RepositoryController.fetchProducts('https://dummyjson.com/products');
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            child: const Heading(text: 'PRODUCTS'),
-            margin: const EdgeInsets.only(top: 20, left: 30, right: 20),
-            alignment: Alignment.topLeft,
-          ),
-          const SizedBox(height: 20),
-          Container(
-            child: DropButton(),
-            margin: const EdgeInsets.only(left: 30, right: 20),
-            alignment: Alignment.centerLeft,
-          ),
-          const SizedBox(height: 50),
-
-          Container(
-              height: 575,
-              margin: const EdgeInsets.only(left: 10, right: 10),
-              padding: const EdgeInsets.all(10),
-              child: ProductGrid())
-          // ItemInList()
-        ],
+      body: Container(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            Container(
+              child: const Heading(text: 'PRODUCTS'),
+              alignment: Alignment.topLeft,
+            ),
+            const SizedBox(height: 20),
+            Container(
+              child: DropButton(),
+              alignment: Alignment.centerLeft,
+            ),
+            const SizedBox(height: 50),
+            Expanded(child: ProductGrid())
+          ],
+        ),
       ),
     );
   }
@@ -63,37 +55,38 @@ class DropButton extends StatefulWidget {
 
 class _DropButtonState extends State<DropButton> {
   String? selected;
-  
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<String>>(
       future: RepositoryController.getCategories(),
       builder: (context, snapshot) {
-        if(snapshot.hasData)  {
+        if (snapshot.hasData) {
           final List<String> _data = snapshot.data!;
           return Container(
             padding: const EdgeInsets.only(left: 14.0, right: 14.0),
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey, width: 1.0),
-              borderRadius: BorderRadius.circular(10)
-            ),
+                border: Border.all(color: Colors.grey, width: 1.0),
+                borderRadius: BorderRadius.circular(10)),
             child: DropdownButton(
-              hint: BoldText(text: 'Categories'),
-              value: selected, 
-              underline: SizedBox(),
-              icon: const Icon(Icons.arrow_drop_down),
-              items: _data.map<DropdownMenuItem<String>>((item) {
-                return DropdownMenuItem(
-                  value: item,
-                  child: BoldText(text: item),
-                );
-              }).toList(), 
-              onChanged: (newVal) {
-                setState(() {
-                  selected = newVal;
-                });
-                RepositoryController.fetchProducts('https://dummyjson.com/products/category/$newVal');
-              }),
+                dropdownColor: Colors.white,
+                hint: BoldText(text: 'Categories'),
+                value: selected,
+                underline: SizedBox(),
+                icon: const Icon(Icons.arrow_drop_down),
+                items: _data.map<DropdownMenuItem<String>>((item) {
+                  return DropdownMenuItem(
+                    value: item,
+                    child: BoldText(text: item),
+                  );
+                }).toList(),
+                onChanged: (newVal) {
+                  setState(() {
+                    selected = newVal;
+                  });
+                  RepositoryController.fetchProducts(
+                      'https://dummyjson.com/products/category/$newVal');
+                }),
           );
         } else {
           return const CircularProgressIndicator();
@@ -105,22 +98,23 @@ class _DropButtonState extends State<DropButton> {
 
 class ProductGrid extends StatelessWidget {
   const ProductGrid({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => GridView.builder(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 280,
-            childAspectRatio: 3/2,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20,
-            mainAxisExtent: 280 ),
-            itemBuilder: (BuildContext context, int index) {
-              return ItemInList(product: RepositoryController.prods[index]);
-            },
-            itemCount: RepositoryController.prods.length,
-          ),
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 250,
+          childAspectRatio: 3 / 2,
+          crossAxisSpacing: 30,
+          mainAxisSpacing: 30,
+          mainAxisExtent: 256,
+        ),
+        itemBuilder: (BuildContext context, int index) {
+          return ItemInList(product: RepositoryController.prods[index]);
+        },
+        itemCount: RepositoryController.prods.length,
+      ),
     );
   }
 }
@@ -135,14 +129,15 @@ class ItemInList extends StatelessWidget {
       child: Container(
         child: Column(
           children: [
-            Container(
+            ClipRRect(
               child: Image.network(
                 product.thumbnail,
+                width: double.infinity,
                 height: 125,
                 fit: BoxFit.cover,
-                
               ),
-              padding: const EdgeInsets.only(left: 7, top: 7, right: 7),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
             ),
             Container(
               padding: const EdgeInsets.all(7),
@@ -150,16 +145,19 @@ class ItemInList extends StatelessWidget {
                 children: [
                   Text(
                     '${product.title}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600
-                    ), ),
+                    style: const TextStyle(fontWeight: FontWeight.w600),
+                  ),
                   Text('\$ ${product.price}'),
                   const SizedBox(height: 15),
                   Container(
-                    child: Text(
-                      product.description,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    height: 50,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Text(
+                        product.description,
+                        textAlign: TextAlign.justify,
+                      ),
                     ),
                   )
                 ],
@@ -167,14 +165,17 @@ class ItemInList extends StatelessWidget {
             )
           ],
         ),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            spreadRadius: 3,
-            blurRadius: 5,
-            offset: Offset(0, 3),
-          )
-        ]),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.3),
+                spreadRadius: 1,
+                blurRadius: 3,
+                offset: Offset(0, 2),
+              )
+            ]),
       ),
       onTap: () {
         Get.toNamed('/detail', arguments: product.id);
@@ -182,8 +183,3 @@ class ItemInList extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
