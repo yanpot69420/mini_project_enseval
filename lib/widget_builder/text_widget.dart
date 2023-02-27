@@ -26,10 +26,7 @@ class Heading5 extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: 20.0,
-        fontWeight: FontWeight.w500,
-        color: Colors.white
-      ),
+          fontSize: 20.0, fontWeight: FontWeight.w500, color: Colors.white),
     );
   }
 }
@@ -40,11 +37,8 @@ class BoldText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text, 
-      style: const TextStyle(
-        fontWeight: FontWeight.w500,
-        
-      ),
+      text,
+      style: const TextStyle(fontWeight: FontWeight.w500, color: Colors.black),
     );
   }
 }

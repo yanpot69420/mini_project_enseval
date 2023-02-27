@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'Mini Project',
       theme: ThemeData(fontFamily: 'Montserrat'),
       home: LoginPage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
-
