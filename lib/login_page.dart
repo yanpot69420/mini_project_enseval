@@ -101,10 +101,6 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(
                             height: 20,
                           ),
-                          // SubmitButton(
-                          //   username: usernameController.text,
-                          //   password: passwordController.text,
-                          // )
                           Container(
                             width: 200,
                             height: 35,
@@ -113,8 +109,6 @@ class _LoginPageState extends State<LoginPage> {
                                   String username = usernameController.text;
                                   String password = passwordController.text;
 
-                                  print('username = $username');
-                                  print('password = $password');
                                   var temp = await LoginController().fetchUser(
                                       User(
                                           username: username,

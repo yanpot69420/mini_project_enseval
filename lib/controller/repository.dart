@@ -15,7 +15,6 @@ class RepositoryController extends GetxController {
 
       prods = RxList<Product>.from(loop.map((e) => Product.fromJson(e)));
       prods.refresh();
-      print('Fetching data from API ($url)');
     } else {
       throw Exception('Failed to fetch data');
     }
@@ -26,7 +25,6 @@ class RepositoryController extends GetxController {
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       var detail = Product.fromJson(json.decode(response.body));
-      print(detail.images.toString());
       return detail;
     } else {
       throw Exception('Failed to fetch detail of product!');

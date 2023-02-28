@@ -46,89 +46,100 @@ class DetailPage extends StatelessWidget {
                     Expanded(
                         child: Container(
                       padding: const EdgeInsets.only(right: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            child: Heading(text: _product.title),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black.withOpacity(0.3),
-                                      spreadRadius: 0.8,
-                                      blurRadius: 2,
-                                      offset: Offset(0, 3))
-                                ]),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          DetailHero(thumbnail: _product.thumbnail),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          SizedBox(
-                              height: 100,
-                              child: ListImageH(list: _product.images)),
-                          SizedBox(
-                            height: 20,
-                          )
-                        ],
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              child: Heading(text: _product.title),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black.withOpacity(0.2),
+                                        spreadRadius: 0.8,
+                                        blurRadius: 2,
+                                        offset: Offset(0, 3))
+                                  ]),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            DetailHero(thumbnail: _product.thumbnail),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            SizedBox(
+                                height: 100,
+                                child: ListImageH(list: _product.images)),
+                            SizedBox(
+                              height: 20,
+                            )
+                          ],
+                        ),
                       ),
                     )),
                     Expanded(
-                        child: Container(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.4),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 20,
+                        flex: 1,
+                        child: SingleChildScrollView(
+                          // scrollDirection: Axis.vertical,
+                          child: Container(
+                            padding: const EdgeInsets.only(
+                                left: 20, right: 20, bottom: 20),
+                            decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.4),
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Heading5(text: 'Brand: ${_product.brand}'),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Heading5(
+                                    text: 'Category: ${_product.category}'),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Heading5(text: 'Price: \$${_product.price}'),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Heading5(
+                                    text:
+                                        'Discount: ${_product.discountPercentage} %'),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Heading5(text: 'Stock: ${_product.stock}'),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Heading5(
+                                    text: 'Rating: ${_product.rating} / 5'),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                DetailRating(rate: _product.rating),
+                                SizedBox(
+                                  height: 25,
+                                ),
+                                Heading5(text: 'Description:'),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Heading5(text: _product.description)
+                              ],
+                            ),
                           ),
-                          Heading5(text: 'Brand: ${_product.brand}'),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Heading5(text: 'Category: ${_product.category}'),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Heading5(text: 'Price: \$${_product.price}'),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Heading5(
-                              text:
-                                  'Discount: ${_product.discountPercentage} %'),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Heading5(text: 'Stock: ${_product.stock}'),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Heading5(text: 'Rating: ${_product.rating} / 5'),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          DetailRating(rate: _product.rating),
-                          SizedBox(
-                            height: 25,
-                          ),
-                          Heading5(text: 'Description:'),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Heading5(text: _product.description)
-                        ],
-                      ),
-                    ))
+                        ))
                   ],
                 ),
               ),

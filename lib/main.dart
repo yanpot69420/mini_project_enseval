@@ -16,15 +16,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: '/login',
+      initialRoute: '/main',
       getPages: [
-        GetPage(name: '/login', page: () => LoginPage()),
+        GetPage(name: '/', page: () => LoginPage()),
         GetPage(name: '/main', page: () => MainPage()),
         GetPage(name: '/detail', page: () => DetailPage()),
       ],
       title: 'Mini Project',
       theme: ThemeData(fontFamily: 'Montserrat'),
-      home: LoginPage(),
       debugShowCheckedModeBanner: false,
     );
   }
