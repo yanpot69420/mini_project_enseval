@@ -11,15 +11,13 @@ class ListImageH extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       itemCount: list.length,
       itemBuilder: (context, index) {
-        return SingleChildScrollView(
-          child: Container(
-            width: 100,
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              color: Colors.black54,
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(image: NetworkImage(list[index])),
-            ),
+        return Container(
+          width: 100,
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+            color: Colors.black54,
+            borderRadius: BorderRadius.circular(10),
+            image: DecorationImage(image: NetworkImage(list[index])),
           ),
         );
       },

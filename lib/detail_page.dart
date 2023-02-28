@@ -23,6 +23,7 @@ class DetailPage extends StatelessWidget {
             return Scaffold(
               backgroundColor: Color.fromARGB(255, 215, 249, 216),
               body: Container(
+                height: double.infinity,
                 margin: const EdgeInsets.all(40),
                 padding: const EdgeInsets.all(40),
                 decoration: BoxDecoration(
